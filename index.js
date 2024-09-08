@@ -5,7 +5,7 @@ import cors from "cors";
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: "https://url-shortner-client-tau.vercel.app" }));
 
 mongoose.connect("mongodb+srv://badikaayushi:grfcAOQqlOyu0p8b@urlshortner.grrdf.mongodb.net/urlShortner");
 
@@ -36,7 +36,7 @@ app.post("/shorten", async (req, res) => {
   const findUrl = await Url.findOne({ redirectUrl: url });
 
   if (findUrl) {
-    res.status(200).json({ url: `http://localhost:3000/${findUrl.shortId}` });
+    res.status(200).json({ url: `https://urlshortnerserver-fnto.onrender.com/${findUrl.shortId}` });
   } else {
     const shortId = shortid.generate();
 
@@ -45,7 +45,7 @@ app.post("/shorten", async (req, res) => {
       redirectUrl: url,
       visitHistory: 0,
     });
-    res.status(200).json({ url: `http://localhost:3000/${shortId}` });
+    res.status(200).json({ url: `https://urlshortnerserver-fnto.onrender.com/${shortId}` });
   }
 });
 
