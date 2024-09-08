@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import shortid from "shortid";
 import cors from "cors";
+import cron from "node-cron";
 
 const app = express();
 app.use(express.json());
@@ -59,6 +60,11 @@ app.get("/:shortUrl", async (req, res) => {
   } else {
     res.status(404).send("URL not found");
   }
+});
+
+cron.schedule("* * * * *", () => {
+  const time = new Date().toLocaleTimeString();
+  console.log(`Server status: running at ${time}`);
 });
 
 app.listen(3000, () => console.log("Server running on port 3000"));
